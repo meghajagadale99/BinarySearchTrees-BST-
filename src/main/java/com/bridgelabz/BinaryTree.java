@@ -16,36 +16,67 @@ public class BinaryTree<T extends Comparable<T>> {
         size++;
         //print();
     }
+
     private boolean isEmpty() {
         return size == 0;
     }
+
     private void add(BinaryNode<T> node, T data) {
         if (data.compareTo(node.data) < 0) {
-            if(node.left != null) {
+            if (node.left != null) {
                 add(node.left, data);
             } else {
                 node.left = new BinaryNode<T>(data);
                 return;
             }
         } else if (data.compareTo(node.data) > 0) {
-            if(node.right != null) {
+            if (node.right != null) {
                 add(node.right, data);
             } else {
                 node.right = new BinaryNode<T>(data);
                 return;
             }
-        }else {return;}
+        } else {
+            return;
+        }
     }
+
     public int size() {
         System.out.println("Size of the tree is:" + size);
         return size;
     }
 
+    public boolean search(T data) {
+        if (isEmpty()) {
+            return false;
+        } else {
+            return search(root, data) == null ? false : true;
+        }
+    }
+
+    //Search...................................................
+    private BinaryNode<T> search(BinaryNode<T> node, T data) {
+        if (data.compareTo(node.data) < 0) {
+            if (node.left != null) {
+                return search(node.left, data);
+            } else {
+                return null;
+            }
+        } else if (data.compareTo(node.data) > 0) {
+            if (node.right != null) {
+                return search(node.right, data);
+            } else {
+                return null;
+            }
+        } else {
+            return node;
+        }
+    }
 
     //Print....................................................
     public void print() {
         System.out.print("Binary Tree: ");
-        if(isEmpty()) {
+        if (isEmpty()) {
             System.out.print("Empty");
         } else {
             System.out.println("\nInOrder: ");
@@ -59,7 +90,7 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     private void printInOrder(BinaryNode<T> node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
         printInOrder(node.left);
@@ -68,7 +99,7 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     private void printPreOrder(BinaryNode<T> node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
 
@@ -78,7 +109,7 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     private void printPostOrder(BinaryNode<T> node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
 
